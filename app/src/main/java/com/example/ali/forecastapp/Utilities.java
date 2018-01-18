@@ -6,46 +6,41 @@ package com.example.ali.forecastapp;
 
 public class Utilities {
 
-    private static final String CELSIUS = "ºC";
-    private static final String FAREHEITH = "ºF";
-    private static final String KPH = "KPH";
-    private static final String MPH = "MPH";
-
     public static String getCurrentTemperature(Current.Weather w) {
         StringBuilder sb = new StringBuilder();
-        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(CELSIUS)) {
+        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(PreferencesManager.C)) {
             sb.append(w.getTempC());
-            sb.append(CELSIUS);
+            sb.append(PreferencesManager.C);
             return sb.toString();
         } else {
             sb.append(w.getTempF());
-            sb.append(FAREHEITH);
+            sb.append(PreferencesManager.F);
             return sb.toString();
         }
     }
 
     public static String getFeelingTemperature(Current.Weather w) {
         StringBuilder sb = new StringBuilder();
-        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(CELSIUS)) {
+        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(PreferencesManager.C)) {
             sb.append(w.getFeelslikeC());
-            sb.append(CELSIUS);
+            sb.append(PreferencesManager.C);
             return sb.toString();
         } else {
             sb.append(w.getFeelslikeF());
-            sb.append(FAREHEITH);
+            sb.append(PreferencesManager.F);
             return sb.toString();
         }
     }
 
     public static String getWindSpeed(Current.Weather w) {
         StringBuilder sb = new StringBuilder();
-        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(KPH)) {
+        if (PreferencesManager.getInstance().getUserSpeed().equals(PreferencesManager.KM)) {
             sb.append(w.getWindKPH());
-            sb.append(KPH);
+            sb.append(PreferencesManager.KM);
             return sb.toString();
         } else {
             sb.append(w.getWindMPH());
-            sb.append(MPH);
+            sb.append(PreferencesManager.MI);
             return sb.toString();
         }
     }

@@ -10,7 +10,7 @@ import com.example.ali.forecastapp.PreferencesManager;
  */
 
 public class Aliplicattion extends Application {
-
+    
     @Override
     public void onCreate() {
         super.onCreate();

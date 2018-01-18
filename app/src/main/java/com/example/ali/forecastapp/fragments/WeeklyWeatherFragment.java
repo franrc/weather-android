@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ali.forecastapp.Current;
 import com.example.ali.forecastapp.Forecast;
 import com.example.ali.forecastapp.LocationGetter;
 import com.example.ali.forecastapp.R;
 import com.example.ali.forecastapp.RecyclerViewAdapter;
 import com.example.ali.forecastapp.ServiceResponse;
+import com.example.ali.forecastapp.Utilities;
 import com.example.ali.forecastapp.myRetrofit;
 
 import java.text.BreakIterator;
@@ -28,6 +30,9 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class WeeklyWeatherFragment extends Fragment {
+
+    Forecast f;
+    Current.LocationWeather lw;
 
     TextView locationTV;
     TextView weatherTV;
@@ -71,7 +76,6 @@ public class WeeklyWeatherFragment extends Fragment {
         temperatureTV = (TextView) view.findViewById(R.id.tempTV);
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -80,7 +84,7 @@ public class WeeklyWeatherFragment extends Fragment {
         Location location = lg.getLocation();
         StringBuilder loc = new StringBuilder();
 
-        if(location != null) {
+        if (location != null) {
             loc.append(Double.toString(location.getLatitude()));
             loc.append(",");
             loc.append(Double.toString(location.getLongitude()));
@@ -94,21 +98,28 @@ public class WeeklyWeatherFragment extends Fragment {
 
         new myRetrofit().getForecast(locS, 7, new ServiceResponse<Forecast>() {
             @Override
-            public void onResponse(Forecast forecast) {
-
-                String city = forecast.getLocationWeather().getCity();
-                String country = forecast.getLocationWeather().getCountry();
-                locationTV.setText(getContext().getString(R.string.loc_text, city, country));
-
-                weatherTV.setText(forecast.getCurrent().getDescription());
-                String t = Double.toString(forecast.getCurrent().getTempC());
-                temperatureTV.setText(t + " ºC");
-
-                List<Forecast.ForecastDay> input = forecast.getForecastDayList();
-                mAdapter = new RecyclerViewAdapter(input);
-                recyclerView.setAdapter(mAdapter);
-
+            public void onResponse(final Forecast forecast) {
+                if(forecast == null) {return;}
+                else {
+                    f = forecast;
+                    lw = f.getLocationWeather();
+                    setData();
+                }
             }
         });
+    }
+
+    public void setData() {
+
+        String city = lw.getCity();
+        String country = lw.getCountry();
+        locationTV.setText(getContext().getString(R.string.loc_text, city, country));
+
+        weatherTV.setText(f.getCurrent().getDescription());
+        temperatureTV.setText(getContext().getString(R.string.temp_text, Utilities.getCurrentTemperature(f.getCurrent())));
+
+        List<Forecast.ForecastDay> input = f.getForecastDayList();
+        mAdapter = new RecyclerViewAdapter(input);
+        recyclerView.setAdapter(mAdapter);
     }
 }

@@ -74,8 +74,6 @@ public class Forecast extends Current {
             return date;
         }
 
-
-
         @JsonProperty("day")
         private void unpackNestedDay(Map<String,Object> day) {
             this.mintempC = (Double) day.get("mintemp_c");

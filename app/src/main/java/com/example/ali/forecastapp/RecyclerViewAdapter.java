@@ -80,6 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final String day = newDateFormat.format(myDate);
         holder.day.setText(day);
         Picasso.with(holder.icon.getContext()).load(fday.getIcon()).error(R.mipmap.ic_launcher).into(holder.icon);
+
         final String tempMin = Double.toString(fday.getMintempC());
         holder.tempMin.setText(tempMin);
         final String tempMax = Double.toString(fday.getMaxtempC());

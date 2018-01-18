@@ -10,13 +10,17 @@ import android.preference.PreferenceManager;
 public class PreferencesManager {
 
 
+    public static final String C = "ºC";
+    public static final String F = "ºF";
+    public static final String KM = "KPH";
+    public static final String MI = "MPH";
+
     private final String USER_DEGREE = "preferences.user.degree";
     private final String USER_SPEED = "preferences.user.speed";
 
     private SharedPreferences sharedPreferences;
 
     private static PreferencesManager sInstance;
-
 
     private PreferencesManager(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -35,11 +39,11 @@ public class PreferencesManager {
     }
 
     public void setUserDegreeFormat(String userDegreeFormat) {
-        sharedPreferences.edit().putString(USER_DEGREE, userDegreeFormat).apply();
+        sharedPreferences.edit().putString(USER_DEGREE, userDegreeFormat).commit();
     }
 
     public String getUserDegreeFormat() {
-        return sharedPreferences.getString(USER_DEGREE, "ºC");
+        return sharedPreferences.getString(USER_DEGREE, C);
     }
 
     public void setUserSpeed(String userSpeedUnit) {
@@ -47,9 +51,8 @@ public class PreferencesManager {
     }
 
     public String getUserSpeed() {
-        return sharedPreferences.getString(USER_SPEED, "KPH");
+        return sharedPreferences.getString(USER_SPEED, KM);
     }
-
 
     public void clear(){
         sharedPreferences.edit()

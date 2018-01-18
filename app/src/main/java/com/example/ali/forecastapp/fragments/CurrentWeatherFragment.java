@@ -27,6 +27,8 @@ import java.util.prefs.Preferences;
  */
 public class CurrentWeatherFragment extends Fragment {
 
+    Current.Weather cw;
+    Current.LocationWeather lw;
     ImageView weatherIcon;
     TextView temperatureTV;
     TextView sensTV;
@@ -103,39 +105,45 @@ public class CurrentWeatherFragment extends Fragment {
             @SuppressLint("StringFormatMatches")
             @Override
             public void onResponse(final Current weather) {
+                if(weather == null) {return;}
 
-                Current.Weather wc = weather.getCurrent();
-
-                Picasso.with(getActivity()).load(wc.getIcon()).error(R.mipmap.ic_launcher).into(weatherIcon);
-
-                String city = weather.getLocationWeather().getCity();
-                String country = weather.getLocationWeather().getCountry();
-                locationTV.setText(getContext().getString(R.string.loc_text, city, country));
-
-                temperatureTV.setText(getContext().getString(R.string.temp_text, Utilities.getCurrentTemperature(wc)));
-
-                sensTV.setText(getContext().getString(R.string.tempfl_text, Utilities.getFeelingTemperature(wc)));
-
-                String desc = wc.getDescription();
-                weatherTV.setText(getContext().getString(R.string.description_text, desc));
-
-                windSpeedTV.setText(getContext().getString(R.string.windSpeed_text, Utilities.getWindSpeed(wc)));
-
-                String windDirection = wc.getWindDir();
-                windDirTV.setText(getContext().getString(R.string.windDirection_text, windDirection));
-
-                //minTempTV.setText(Double.toString(weather.getCurrent().getTempMin()));
-
-                //maxTempTV.setText(Double.toString(weather.getCurrent().getTempMax()));
-
-                double humidity = wc.getHumidity();
-                humidityTV.setText(getContext().getString(R.string.humidity_text, humidity));
-
-                double cloudiness = wc.getCloudiness();
-                cloudinessTV.setText(getContext().getString(R.string.cloudiness_text, cloudiness));
+                cw = weather.getCurrent();
+                lw = weather.getLocationWeather();
+                setData();
 
             }
         });
     }
 
+    public void setData() {
+
+        Picasso.with(getActivity()).load(cw.getIcon()).error(R.mipmap.ic_launcher).into(weatherIcon);
+
+        String city = lw.getCity();
+        String country = lw.getCountry();
+        locationTV.setText(getContext().getString(R.string.loc_text, city, country));
+
+        temperatureTV.setText(getContext().getString(R.string.temp_text, Utilities.getCurrentTemperature(cw)));
+
+        sensTV.setText(getContext().getString(R.string.tempfl_text, Utilities.getFeelingTemperature(cw)));
+
+        String desc = cw.getDescription();
+        weatherTV.setText(getContext().getString(R.string.description_text, desc));
+
+        windSpeedTV.setText(getContext().getString(R.string.windSpeed_text, Utilities.getWindSpeed(cw)));
+
+        String windDirection = cw.getWindDir();
+        windDirTV.setText(getContext().getString(R.string.windDirection_text, windDirection));
+
+        //minTempTV.setText(Double.toString(weather.getCurrent().getTempMin()));
+
+        //maxTempTV.setText(Double.toString(weather.getCurrent().getTempMax()));
+
+        double humidity = cw.getHumidity();
+        humidityTV.setText(getContext().getString(R.string.humidity_text, Double.toString(humidity)));
+
+        double cloudiness = cw.getCloudiness();
+        cloudinessTV.setText(getContext().getString(R.string.cloudiness_text, Double.toString(cloudiness)));
+
+    }
 }
