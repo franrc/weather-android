@@ -1,6 +1,6 @@
 package com.example.ali.forecastapp;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ali.forecastapp.fragments.WeeklyWeatherFragment;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by ali on 9/1/18.
@@ -64,6 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return vh;
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         Forecast.ForecastDay fday = values.get(position);
@@ -81,10 +85,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.day.setText(day);
         Picasso.with(holder.icon.getContext()).load(fday.getIcon()).error(R.mipmap.ic_launcher).into(holder.icon);
 
-        final String tempMin = Double.toString(fday.getMintempC());
-        holder.tempMin.setText(tempMin);
-        final String tempMax = Double.toString(fday.getMaxtempC());
-        holder.tempMax.setText(tempMax);
+        String tmin = Utilities.getMinTemp(fday);
+        holder.tempMin.setText(tmin);
+        String tmax = Utilities.getMaxTemp(fday);
+        holder.tempMax.setText(tmax);
+
     }
 
     @Override

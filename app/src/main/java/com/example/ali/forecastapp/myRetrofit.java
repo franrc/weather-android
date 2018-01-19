@@ -80,7 +80,6 @@ public class myRetrofit {
                 }
             }
 
-
             @Override
             public void onFailure(Call<Forecast> call, Throwable t) {
 

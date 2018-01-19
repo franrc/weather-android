@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/trans"
     tools:context="com.example.ali.forecastapp.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        android:background="@color/trans"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+            android:background="@color/trans"
+            android:elevation="0dp"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
+            app:elevation="0dp"/>
 
     </android.support.design.widget.AppBarLayout>
 

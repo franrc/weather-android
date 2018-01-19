@@ -51,16 +51,31 @@ public class Forecast extends Current {
 
     public static class ForecastDay {
 
-        private Double mintempC;
-        private Double maxtempC;
+        private double mintempC;
+        private double maxtempC;
+
+        private double mintempF;
+        private double maxtempF;
 
         private String date;
         private String conditionText;
         private String conditionIcon;
 
-        public Double getMintempC() { return mintempC; }
+        public double getMintempC() {
+            return mintempC;
+        }
 
-        public Double getMaxtempC() { return maxtempC; }
+        public double getMaxtempC() {
+            return maxtempC;
+        }
+
+        public double getMintempF() {
+            return mintempF;
+        }
+
+        public double getMaxtempF() {
+            return maxtempF;
+        }
 
         public String getConditionText() {
             return conditionText;
@@ -76,8 +91,10 @@ public class Forecast extends Current {
 
         @JsonProperty("day")
         private void unpackNestedDay(Map<String,Object> day) {
-            this.mintempC = (Double) day.get("mintemp_c");
-            this.maxtempC = (Double) day.get("maxtemp_c");
+            this.mintempC = (double) day.get("mintemp_c");
+            this.maxtempC = (double) day.get("maxtemp_c");
+            this.mintempF = (double) day.get("mintemp_f");
+            this.maxtempF = (double) day.get("maxtemp_f");
 
             unpackNestedCondition((Map)day.get("condition"));
         }

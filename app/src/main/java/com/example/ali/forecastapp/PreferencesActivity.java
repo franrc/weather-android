@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.example.ali.forecastapp.fragments.WeeklyWeatherFragment;
+
 public class PreferencesActivity extends AppCompatActivity {
 
 

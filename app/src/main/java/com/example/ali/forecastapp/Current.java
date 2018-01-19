@@ -26,6 +26,9 @@ public class Current {
         private String descriptionText;
         private String conditionIcon;
 
+        @JsonProperty("is_day")
+        private boolean dayOrNight;
+
         @JsonProperty("temp_c")
         private double tempC;
         @JsonProperty("feelslike_c")
@@ -65,6 +68,10 @@ public class Current {
 
         public String getIcon() {
             return conditionIcon;
+        }
+
+        public boolean isDayOrNight() {
+            return dayOrNight;
         }
 
         public double getTempC() {

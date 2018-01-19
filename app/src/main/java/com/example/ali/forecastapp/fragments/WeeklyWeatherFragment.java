@@ -68,9 +68,6 @@ public class WeeklyWeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recylerView);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
         locationTV = (TextView) view.findViewById(R.id.locationTV);
         weatherTV = (TextView) view.findViewById(R.id.weatherTV);
         temperatureTV = (TextView) view.findViewById(R.id.tempTV);
@@ -79,6 +76,9 @@ public class WeeklyWeatherFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
         LocationGetter lg = new LocationGetter(this.getContext());
         Location location = lg.getLocation();
@@ -94,7 +94,7 @@ public class WeeklyWeatherFragment extends Fragment {
             loc.append(0);
         }
 
-        String locS = loc.toString();
+        String locS = "Bangkok";
 
         new myRetrofit().getForecast(locS, 7, new ServiceResponse<Forecast>() {
             @Override

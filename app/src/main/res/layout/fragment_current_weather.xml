@@ -1,17 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/trans"
     tools:context="com.example.ali.forecastapp.fragments.CurrentWeatherFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
-
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/weatherIcon"
@@ -36,10 +36,10 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Location"
+                tools:text="Location"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/tempText"
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Temperatura"
+                tools:text="Temperatura"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
                 android:textSize="36sp" />
@@ -60,10 +60,10 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Sensación"
+                tools:text="Sensación"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
         </LinearLayout>
 
@@ -82,10 +82,10 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Tiempo"
+                tools:text="Tiempo"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/windSpeedText"
@@ -94,7 +94,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Viento"
+                tools:text="Viento"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
                 android:textSize="36sp" />
@@ -106,10 +106,10 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Dir. del viento"
+                tools:text="Dir. del viento"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
 
         </LinearLayout>
 
@@ -136,10 +136,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Lluvia"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:text="Lluvia" />
         </LinearLayout>
 
         <LinearLayout
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Humedad"
+                android:text ="Humedad"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
                 android:textSize="24sp" />
@@ -165,10 +165,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                tools:text="Humedad"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.TextView"
                 android:textColor="@color/colorText"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:text="Humedad" />
         </LinearLayout>
 
     </RelativeLayout>

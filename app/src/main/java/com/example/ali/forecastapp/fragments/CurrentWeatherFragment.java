@@ -5,22 +5,24 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ali.forecastapp.Current;
 import com.example.ali.forecastapp.LocationGetter;
+import com.example.ali.forecastapp.MainActivity;
 import com.example.ali.forecastapp.R;
 import com.example.ali.forecastapp.ServiceResponse;
 import com.example.ali.forecastapp.Utilities;
 import com.example.ali.forecastapp.myRetrofit;
 import com.squareup.picasso.Picasso;
-
-import java.util.prefs.Preferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ public class CurrentWeatherFragment extends Fragment {
 
     Current.Weather cw;
     Current.LocationWeather lw;
+    FrameLayout background;
     ImageView weatherIcon;
     TextView temperatureTV;
     TextView sensTV;
@@ -65,6 +68,7 @@ public class CurrentWeatherFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        background = (FrameLayout) view.findViewById(R.id.frameLayout);
         weatherIcon = (ImageView) view.findViewById(R.id.weatherIcon);
         temperatureTV = (TextView) view.findViewById(R.id.tempText);
         sensTV = (TextView) view.findViewById(R.id.sensText);
@@ -97,11 +101,10 @@ public class CurrentWeatherFragment extends Fragment {
             loc.append(0);
         }
 
-        String locS = loc.toString();
+        String locS = "Bangkok";
         Log.i("Location: ", locS);
 
-        new myRetrofit().getCurrentWeather(locS,
-                new ServiceResponse<Current>() {
+        new myRetrofit().getCurrentWeather("Bangkok", new ServiceResponse<Current>() {
             @SuppressLint("StringFormatMatches")
             @Override
             public void onResponse(final Current weather) {
@@ -109,6 +112,11 @@ public class CurrentWeatherFragment extends Fragment {
 
                 cw = weather.getCurrent();
                 lw = weather.getLocationWeather();
+                if(cw.isDayOrNight()) {
+                    MainActivity.getDrawerLayout().setBackgroundResource(R.drawable.day_background);
+                } else {
+                    MainActivity.getDrawerLayout().setBackgroundResource(R.drawable.night_background);
+                }
                 setData();
 
             }
@@ -135,12 +143,8 @@ public class CurrentWeatherFragment extends Fragment {
         String windDirection = cw.getWindDir();
         windDirTV.setText(getContext().getString(R.string.windDirection_text, windDirection));
 
-        //minTempTV.setText(Double.toString(weather.getCurrent().getTempMin()));
-
-        //maxTempTV.setText(Double.toString(weather.getCurrent().getTempMax()));
-
         double humidity = cw.getHumidity();
-        humidityTV.setText(getContext().getString(R.string.humidity_text, Double.toString(humidity)));
+        humidityTV.setText(getContext().getString(R.string.humidity_text, Double.toString(humidity)) + "%");
 
         double cloudiness = cw.getCloudiness();
         cloudinessTV.setText(getContext().getString(R.string.cloudiness_text, Double.toString(cloudiness)));

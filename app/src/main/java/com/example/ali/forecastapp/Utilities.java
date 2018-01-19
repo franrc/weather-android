@@ -44,4 +44,26 @@ public class Utilities {
             return sb.toString();
         }
     }
+
+    public static String getMinTemp(Forecast.ForecastDay fd) {
+        StringBuilder sb = new StringBuilder();
+        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(PreferencesManager.C)) {
+            sb.append(fd.getMintempC());
+            return sb.toString();
+        } else {
+            sb.append(fd.getMintempF());
+            return sb.toString();
+        }
+    }
+
+    public static String getMaxTemp(Forecast.ForecastDay fd) {
+        StringBuilder sb = new StringBuilder();
+        if (PreferencesManager.getInstance().getUserDegreeFormat().equals(PreferencesManager.C)) {
+            sb.append(fd.getMaxtempC());
+            return sb.toString();
+        } else {
+            sb.append(fd.getMaxtempF());
+            return sb.toString();
+        }
+    }
 }
